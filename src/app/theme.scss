@@ -28,17 +28,22 @@ $theme-stroke-300: #bad1ef;
   --theme-shadow-glow: 0 18px 42px rgb(79 107 237 / 0.2);
   --theme-glass-hero-border: rgb(79 107 237 / 0.48);
   --theme-glass-card-border: rgb(0 183 195 / 0.28);
-  --theme-accent-bar:
-    linear-gradient(90deg, rgb(79 107 237 / 0.95), rgb(0 183 195 / 0.92), rgb(232 90 173 / 0.9));
+  --theme-accent-bar: linear-gradient(
+    90deg,
+    rgb(79 107 237 / 0.95),
+    rgb(0 183 195 / 0.92),
+    rgb(232 90 173 / 0.9)
+  );
   --theme-gradient-backdrop:
     radial-gradient(circle at 12% 18%, rgb(79 107 237 / 0.38), rgb(79 107 237 / 0) 46%),
     radial-gradient(circle at 88% 14%, rgb(0 183 195 / 0.3), rgb(0 183 195 / 0) 40%),
     radial-gradient(circle at 54% 92%, rgb(232 90 173 / 0.24), rgb(232 90 173 / 0) 42%),
     linear-gradient(155deg, rgb(234 242 255 / 0.84), rgb(223 234 255 / 0.8));
-  --theme-gradient-hero:
-    linear-gradient(138deg, rgb(243 248 255 / 0.62), rgb(228 240 255 / 0.48));
-  --theme-gradient-card:
-    linear-gradient(165deg, rgb(243 248 255 / 0.58), rgb(228 240 255 / 0.46));
-  --theme-gradient-toolbar:
-    linear-gradient(180deg, rgb(243 248 255 / 0.54), rgb(234 244 255 / 0.42));
+  --theme-gradient-hero: linear-gradient(138deg, rgb(243 248 255 / 0.62), rgb(228 240 255 / 0.48));
+  --theme-gradient-card: linear-gradient(165deg, rgb(243 248 255 / 0.58), rgb(228 240 255 / 0.46));
+  --theme-gradient-toolbar: linear-gradient(
+    180deg,
+    rgb(243 248 255 / 0.54),
+    rgb(234 244 255 / 0.42)
+  );
 }

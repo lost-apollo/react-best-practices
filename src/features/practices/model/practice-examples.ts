@@ -12,7 +12,11 @@ export const practiceExamples: PracticeExample[] = [
       'Await request A before starting request B when B does not depend on A, creating a serialized waterfall.',
     rationale:
       'Removing avoidable waterfalls is the highest-impact way to improve perceived speed in client-rendered apps.',
-    checklist: ['Independent requests start together', 'No avoidable sequential awaits', 'Loading states remain accurate'],
+    checklist: [
+      'Independent requests start together',
+      'No avoidable sequential awaits',
+      'Loading states remain accurate',
+    ],
   },
   {
     id: 'waterfall-effect-chain-fetching',
@@ -25,7 +29,11 @@ export const practiceExamples: PracticeExample[] = [
       'Fetch in one effect, set state, then trigger the next fetch in another effect based on that state, causing staged latency.',
     rationale:
       'Effect chains increase complexity and latency while making loading behavior harder to reason about.',
-    checklist: ['No staged fetch-effect chains', 'Request flow is explicit', 'Interaction logic stays in handlers'],
+    checklist: [
+      'No staged fetch-effect chains',
+      'Request flow is explicit',
+      'Interaction logic stays in handlers',
+    ],
   },
   {
     id: 'bundle-dependency-budget',
@@ -38,20 +46,27 @@ export const practiceExamples: PracticeExample[] = [
       'Introduce heavy utility/UI packages for small one-off helpers without checking cost or overlap.',
     rationale:
       'Bundle size directly affects startup and interaction speed, especially on constrained devices.',
-    checklist: ['Dependency has clear justification', 'Alternative evaluated', 'Bundle impact called out in review'],
+    checklist: [
+      'Dependency has clear justification',
+      'Alternative evaluated',
+      'Bundle impact called out in review',
+    ],
   },
   {
     id: 'bundle-lazy-feature-entry',
     category: 'Bundle Size Optimization',
     priority: 'Critical',
     title: 'Split code by feature and lazy-load non-critical views',
-    doExample:
-      'Load rarely used routes or heavy feature modules lazily so core paths stay lean.',
+    doExample: 'Load rarely used routes or heavy feature modules lazily so core paths stay lean.',
     dontExample:
       'Eagerly import every feature in the first paint path, including screens users may never open.',
     rationale:
       'Feature-level code splitting reduces initial download and parse time for the main experience.',
-    checklist: ['Main path stays small', 'Non-critical views are lazy', 'Fallback UI is accessible'],
+    checklist: [
+      'Main path stays small',
+      'Non-critical views are lazy',
+      'Fallback UI is accessible',
+    ],
   },
   {
     id: 'data-fetching-explicit-state',
@@ -62,9 +77,12 @@ export const practiceExamples: PracticeExample[] = [
       'Represent request state clearly and render predictable UI for loading, error, and success branches.',
     dontExample:
       'Blend partial state and booleans ad hoc, making edge cases like stale errors hard to track.',
-    rationale:
-      'Explicit async state makes behavior easier to test, debug, and maintain.',
-    checklist: ['Loading state is visible', 'Error state is actionable', 'Success state handles empty data'],
+    rationale: 'Explicit async state makes behavior easier to test, debug, and maintain.',
+    checklist: [
+      'Loading state is visible',
+      'Error state is actionable',
+      'Success state handles empty data',
+    ],
   },
   {
     id: 'data-fetching-cancel-stale',
@@ -77,7 +95,55 @@ export const practiceExamples: PracticeExample[] = [
       'Allow slow previous requests to overwrite newer state after filters or route changes.',
     rationale:
       'Stale write protection preserves correctness and avoids confusing flicker in rapidly changing UIs.',
-    checklist: ['Stale response guard exists', 'Unmount cleanup handles requests', 'Rapid filter changes stay correct'],
+    checklist: [
+      'Stale response guard exists',
+      'Unmount cleanup handles requests',
+      'Rapid filter changes stay correct',
+    ],
+  },
+  {
+    id: 'hooks-effect-dependencies-complete',
+    category: 'React Hooks',
+    priority: 'High',
+    title: 'Keep effect dependencies complete and move interaction logic to handlers',
+    doExample:
+      'Include all referenced values in effect dependencies and run user-triggered side effects from event handlers instead of effects.',
+    dontExample:
+      'Suppress dependency warnings or trigger submit/navigation side effects from effects that watch local state toggles.',
+    codeLanguage: 'tsx',
+    doCode: `const [query, setQuery] = useState('')
+
+const loadItems = useCallback(async () => {
+  const nextItems = await searchItems(query)
+  setItems(nextItems)
+}, [query])
+
+useEffect(() => {
+  void loadItems()
+}, [loadItems])
+
+function handleSaveClick() {
+  void saveDraft({ query })
+}`,
+    dontCode: `const [query, setQuery] = useState('')
+const [shouldSave, setShouldSave] = useState(false)
+
+useEffect(() => {
+  void searchItems(query).then(setItems)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [])
+
+useEffect(() => {
+  if (!shouldSave) return
+  void saveDraft({ query })
+}, [shouldSave])`,
+    rationale:
+      'Hooks stay predictable when dependencies are accurate and user-intent actions are executed where the interaction happens.',
+    checklist: [
+      'Effect deps are complete',
+      'No lint suppression for hooks rules',
+      'Click-driven side effects live in handlers',
+    ],
   },
   {
     id: 'rerender-stable-props',
@@ -88,9 +154,12 @@ export const practiceExamples: PracticeExample[] = [
       'Hoist constants and memoize callbacks only where reference stability avoids meaningful rerenders.',
     dontExample:
       'Create new object, array, or function props each render for expensive memoized child trees.',
-    rationale:
-      'Stable references reduce avoidable child work and improve interaction smoothness.',
-    checklist: ['Memoized children receive stable props', 'No unnecessary inline object props', 'Profiling shows rerender reduction'],
+    rationale: 'Stable references reduce avoidable child work and improve interaction smoothness.',
+    checklist: [
+      'Memoized children receive stable props',
+      'No unnecessary inline object props',
+      'Profiling shows rerender reduction',
+    ],
   },
   {
     id: 'rerender-derived-state',
@@ -99,11 +168,13 @@ export const practiceExamples: PracticeExample[] = [
     title: 'Derive display state during render when possible',
     doExample:
       'Compute filtered labels/counts from source state in render and keep source of truth minimal.',
-    dontExample:
-      'Store redundant derived values in state and sync them via effects.',
-    rationale:
-      'Derived-on-render state removes synchronization bugs and reduces effect churn.',
-    checklist: ['Single source of truth', 'No sync effects for derived values', 'Render computations remain lightweight'],
+    dontExample: 'Store redundant derived values in state and sync them via effects.',
+    rationale: 'Derived-on-render state removes synchronization bugs and reduces effect churn.',
+    checklist: [
+      'Single source of truth',
+      'No sync effects for derived values',
+      'Render computations remain lightweight',
+    ],
   },
   {
     id: 'rendering-explicit-branches',
@@ -116,7 +187,11 @@ export const practiceExamples: PracticeExample[] = [
       'Rely on brittle short-circuit chains that hide edge cases and complicate accessibility semantics.',
     rationale:
       'Explicit branches improve readability and prevent subtle rendering and a11y regressions.',
-    checklist: ['Loading/empty/success paths are explicit', 'Semantics remain correct per branch', 'No fragile chained conditions'],
+    checklist: [
+      'Loading/empty/success paths are explicit',
+      'Semantics remain correct per branch',
+      'No fragile chained conditions',
+    ],
   },
   {
     id: 'rendering-avoid-layout-thrash',
@@ -129,7 +204,11 @@ export const practiceExamples: PracticeExample[] = [
       'Mix repeated DOM reads and writes in loops, forcing frequent reflow under user interaction.',
     rationale:
       'Avoiding layout thrash protects frame consistency and keeps transitions responsive.',
-    checklist: ['DOM writes are batched', 'No hot-path forced reflow', 'Interactions remain smooth'],
+    checklist: [
+      'DOM writes are batched',
+      'No hot-path forced reflow',
+      'Interactions remain smooth',
+    ],
   },
   {
     id: 'js-perf-pragmatic-optimization',
@@ -140,9 +219,12 @@ export const practiceExamples: PracticeExample[] = [
       'Use profiler data to target real hotspots and keep code simple when wins are negligible.',
     dontExample:
       'Micro-optimize loops or object shapes preemptively while larger rendering/network costs dominate.',
-    rationale:
-      'Measured optimization avoids complexity and preserves maintainability.',
-    checklist: ['Hotspot identified first', 'Optimization is measurable', 'Readability remains acceptable'],
+    rationale: 'Measured optimization avoids complexity and preserves maintainability.',
+    checklist: [
+      'Hotspot identified first',
+      'Optimization is measurable',
+      'Readability remains acceptable',
+    ],
   },
   {
     id: 'advanced-patterns-use-transition',
@@ -153,9 +235,12 @@ export const practiceExamples: PracticeExample[] = [
       'Mark non-blocking UI updates as transitions when this improves responsiveness during input-heavy interactions.',
     dontExample:
       'Apply advanced React concurrency patterns everywhere without a demonstrated responsiveness issue.',
-    rationale:
-      'Advanced patterns should be justified by user experience impact, not novelty.',
-    checklist: ['Non-urgent updates are identified', 'Input stays responsive', 'Complexity is justified'],
+    rationale: 'Advanced patterns should be justified by user experience impact, not novelty.',
+    checklist: [
+      'Non-urgent updates are identified',
+      'Input stays responsive',
+      'Complexity is justified',
+    ],
   },
   {
     id: 'advanced-patterns-avoid-over-abstraction',
@@ -164,11 +249,14 @@ export const practiceExamples: PracticeExample[] = [
     title: 'Reach for advanced abstractions only when repetition is real',
     doExample:
       'Keep code straightforward first and extract advanced abstractions after concrete repeated use cases appear.',
-    dontExample:
-      'Introduce generic render-prop/hook frameworks for one isolated scenario.',
+    dontExample: 'Introduce generic render-prop/hook frameworks for one isolated scenario.',
     rationale:
       'Delayed abstraction keeps features easier to evolve and reduces accidental complexity.',
-    checklist: ['At least two real use cases exist', 'Abstraction cost is acceptable', 'Ownership remains clear'],
+    checklist: [
+      'At least two real use cases exist',
+      'Abstraction cost is acceptable',
+      'Ownership remains clear',
+    ],
   },
   {
     id: 'a11y-semantic-controls',
@@ -188,9 +276,12 @@ export const practiceExamples: PracticeExample[] = [
 </button>`,
     dontCode: `<input placeholder="Display name" />
 <div onClick={saveProfile}>Save</div>`,
-    rationale:
-      'Semantic HTML gives keyboard and assistive technology support by default.',
-    checklist: ['Interactive controls are semantic', 'Inputs have labels', 'Image text alternatives are correct'],
+    rationale: 'Semantic HTML gives keyboard and assistive technology support by default.',
+    checklist: [
+      'Interactive controls are semantic',
+      'Inputs have labels',
+      'Image text alternatives are correct',
+    ],
   },
   {
     id: 'a11y-focus-and-headings',
@@ -225,7 +316,11 @@ button:focus {
 }`,
     rationale:
       'Focus and structure are core navigation tools for keyboard and assistive-tech users.',
-    checklist: ['Focus indicators are visible', 'Heading order is logical', 'Landmarks are used intentionally'],
+    checklist: [
+      'Focus indicators are visible',
+      'Heading order is logical',
+      'Landmarks are used intentionally',
+    ],
   },
   {
     id: 'a11y-dialog-focus-management',
@@ -257,7 +352,11 @@ button:focus {
 // No focus trap, no restore focus, no Escape handling`,
     rationale:
       'Predictable focus behavior is mandatory for modal accessibility and keyboard navigation trust.',
-    checklist: ['Initial focus is intentional', 'Escape closes when appropriate', 'Focus returns to a sensible target'],
+    checklist: [
+      'Initial focus is intentional',
+      'Escape closes when appropriate',
+      'Focus returns to a sensible target',
+    ],
   },
   {
     id: 'a11y-icon-actions-named',
@@ -284,7 +383,11 @@ button:focus {
 <Button icon={<Edit24Regular />} />`,
     rationale:
       'Icon-only controls need text alternatives to be usable with assistive technologies.',
-    checklist: ['All icon-only actions have labels', 'Label text is action-oriented', 'Tooltips do not replace labels'],
+    checklist: [
+      'All icon-only actions have labels',
+      'Label text is action-oriented',
+      'Tooltips do not replace labels',
+    ],
   },
   {
     id: 'a11y-status-live-regions',
@@ -307,7 +410,11 @@ button:focus {
 // No role="alert" or role="status"`,
     rationale:
       'Users relying on assistive tech must receive the same feedback timing as sighted users.',
-    checklist: ['Error messages are announced', 'Status updates have semantic roles', 'Announcements are concise'],
+    checklist: [
+      'Error messages are announced',
+      'Status updates have semantic roles',
+      'Announcements are concise',
+    ],
   },
   {
     id: 'a11y-table-semantics',
@@ -334,7 +441,11 @@ button:focus {
 </div>`,
     rationale:
       'Table semantics communicate relationships between headers and cells for efficient navigation.',
-    checklist: ['Headers are explicit', 'Table has an accessible name', 'Row actions are keyboard reachable'],
+    checklist: [
+      'Headers are explicit',
+      'Table has an accessible name',
+      'Row actions are keyboard reachable',
+    ],
   },
   {
     id: 'a11y-contrast-do-not-rely-on-color',
@@ -359,7 +470,11 @@ button:focus {
 // Meaning depends on color only`,
     rationale:
       'Color-only signals fail for low-vision and color-blind users and reduce clarity in varied displays.',
-    checklist: ['Status has text labels', 'Contrast is sufficient', 'Meaning survives grayscale/low saturation'],
+    checklist: [
+      'Status has text labels',
+      'Contrast is sufficient',
+      'Meaning survives grayscale/low saturation',
+    ],
   },
   {
     id: 'fluent-prefer-primitives',
@@ -372,7 +487,11 @@ button:focus {
       'Rebuild common controls from generic elements when Fluent already provides accessible variants.',
     rationale:
       'Fluent primitives provide tested accessibility behavior and consistent interaction patterns.',
-    checklist: ['Fluent primitive exists for control', 'Appearance props are used intentionally', 'Custom wrappers stay minimal'],
+    checklist: [
+      'Fluent primitive exists for control',
+      'Appearance props are used intentionally',
+      'Custom wrappers stay minimal',
+    ],
   },
   {
     id: 'fluent-theme-token-discipline',
@@ -383,9 +502,12 @@ button:focus {
       'Style components with existing theme variables and scoped classes to keep branding consistent.',
     dontExample:
       'Scatter one-off inline colors and spacing values directly in JSX across multiple features.',
-    rationale:
-      'Token-driven styling improves consistency and simplifies future design updates.',
-    checklist: ['Theme variables are reused', 'Inline styles stay minimal', 'Visual language is consistent'],
+    rationale: 'Token-driven styling improves consistency and simplifies future design updates.',
+    checklist: [
+      'Theme variables are reused',
+      'Inline styles stay minimal',
+      'Visual language is consistent',
+    ],
   },
   {
     id: 'forms-field-validation-state',
@@ -398,7 +520,11 @@ button:focus {
       'Show invalid state only after submit with no field-level cues about what needs correction.',
     rationale:
       'Immediate and clear validation feedback reduces user friction and failed submissions.',
-    checklist: ['Required fields are marked', 'Invalid state is visible', 'Validation message is actionable'],
+    checklist: [
+      'Required fields are marked',
+      'Invalid state is visible',
+      'Validation message is actionable',
+    ],
   },
   {
     id: 'forms-trim-and-normalize-input',
@@ -411,7 +537,11 @@ button:focus {
       'Persist raw input directly with accidental whitespace and inconsistent casing across records.',
     rationale:
       'Boundary normalization preserves data quality without over-processing during each keystroke.',
-    checklist: ['Normalization happens at submit', 'Stored values are consistent', 'Input behavior remains responsive'],
+    checklist: [
+      'Normalization happens at submit',
+      'Stored values are consistent',
+      'Input behavior remains responsive',
+    ],
   },
   {
     id: 'review-reject-waterfalls-and-boundary-leaks',
@@ -422,9 +552,12 @@ button:focus {
       'Call out serialized independent requests and cross-feature/shared import leaks during review.',
     dontExample:
       'Approve latent architecture debt that couples features and slows critical rendering paths.',
-    rationale:
-      'Early review guardrails prevent regressions that become expensive to unwind later.',
-    checklist: ['Async flow is efficient', 'Feature boundaries stay clear', 'Shared remains domain-agnostic'],
+    rationale: 'Early review guardrails prevent regressions that become expensive to unwind later.',
+    checklist: [
+      'Async flow is efficient',
+      'Feature boundaries stay clear',
+      'Shared remains domain-agnostic',
+    ],
   },
   {
     id: 'review-verify-a11y-and-loading-branches',
@@ -435,9 +568,12 @@ button:focus {
       'Ensure keyboard paths, labeling, and explicit loading/error/success rendering are covered before merge.',
     dontExample:
       'Approve UI changes with silent failures, missing labels, or ambiguous conditional rendering.',
-    rationale:
-      'Review-time quality checks keep regressions out of demos and production paths.',
-    checklist: ['Labels and keyboard paths verified', 'UI states are explicit', 'Error feedback is announced clearly'],
+    rationale: 'Review-time quality checks keep regressions out of demos and production paths.',
+    checklist: [
+      'Labels and keyboard paths verified',
+      'UI states are explicit',
+      'Error feedback is announced clearly',
+    ],
   },
   {
     id: 'structure-feature-first-boundaries',
@@ -448,9 +584,12 @@ button:focus {
       'Keep UI, model, hooks, and api grouped inside each feature and route shared utilities through src/shared only when truly generic.',
     dontExample:
       'Split by file type globally or cross-import features directly without a stable boundary.',
-    rationale:
-      'Feature ownership improves discoverability and reduces accidental coupling.',
-    checklist: ['Feature folders are domain-driven', 'Cross-feature imports are controlled', 'Shared code stays generic'],
+    rationale: 'Feature ownership improves discoverability and reduces accidental coupling.',
+    checklist: [
+      'Feature folders are domain-driven',
+      'Cross-feature imports are controlled',
+      'Shared code stays generic',
+    ],
   },
   {
     id: 'structure-promote-shared-on-second-use',
@@ -459,24 +598,29 @@ button:focus {
     title: 'Promote code to shared after second real use case',
     doExample:
       'Keep utilities in-feature first, then move to shared when another feature proves reuse.',
-    dontExample:
-      'Move code to shared preemptively and create vague ownership for one-off helpers.',
-    rationale:
-      'Delayed promotion keeps shared APIs small and meaningful.',
-    checklist: ['Second use case verified', 'API is domain-agnostic', 'Ownership docs remain clear'],
+    dontExample: 'Move code to shared preemptively and create vague ownership for one-off helpers.',
+    rationale: 'Delayed promotion keeps shared APIs small and meaningful.',
+    checklist: [
+      'Second use case verified',
+      'API is domain-agnostic',
+      'Ownership docs remain clear',
+    ],
   },
   {
     id: 'style-follow-lint-guardrails',
     category: 'Style & Linting',
     priority: 'High',
     title: 'Treat lint and style rules as quality guardrails',
-    doExample:
-      'Fix lint and style issues directly and document exceptions only when unavoidable.',
+    doExample: 'Fix lint and style issues directly and document exceptions only when unavoidable.',
     dontExample:
       'Bypass warnings to ship quickly or disable rules without an explicit team reason.',
     rationale:
       'Consistent linting catches accessibility, performance, and maintainability regressions early.',
-    checklist: ['No unexplained rule bypasses', 'CI checks stay green', 'Rule exceptions are documented'],
+    checklist: [
+      'No unexplained rule bypasses',
+      'CI checks stay green',
+      'Rule exceptions are documented',
+    ],
   },
   {
     id: 'style-keep-components-focused',
@@ -487,8 +631,11 @@ button:focus {
       'Split large components by responsibility early so UI logic and domain logic remain clear.',
     dontExample:
       'Accumulate unrelated concerns in one component until refactoring becomes risky and expensive.',
-    rationale:
-      'Small focused components are easier to test, review, and optimize.',
-    checklist: ['Component has one primary job', 'Effects are minimal and explicit', 'Refactors stay localized'],
+    rationale: 'Small focused components are easier to test, review, and optimize.',
+    checklist: [
+      'Component has one primary job',
+      'Effects are minimal and explicit',
+      'Refactors stay localized',
+    ],
   },
 ]

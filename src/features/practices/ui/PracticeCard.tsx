@@ -34,7 +34,7 @@ export function PracticeCard({ example }: PracticeCardProps) {
           </SyntaxHighlighter>
         </section>
 
-        <section className="practice-card-example practice-card-example-dont" aria-label="Don&apos;t">
+        <section className="practice-card-example practice-card-example-dont" aria-label="Don't">
           <h4>Don&apos;t</h4>
           <p>{example.dontExample}</p>
           <SyntaxHighlighter

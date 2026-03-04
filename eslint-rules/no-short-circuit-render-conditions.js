@@ -8,7 +8,12 @@ function hasShortCircuitLogical(node) {
   }
 
   if (node.type === 'LogicalExpression') {
-    return node.operator === '&&' || node.operator === '||' || hasShortCircuitLogical(node.left) || hasShortCircuitLogical(node.right)
+    return (
+      node.operator === '&&' ||
+      node.operator === '||' ||
+      hasShortCircuitLogical(node.left) ||
+      hasShortCircuitLogical(node.right)
+    )
   }
 
   if (node.type === 'UnaryExpression') {
@@ -20,7 +25,10 @@ function hasShortCircuitLogical(node) {
   }
 
   if (node.type === 'CallExpression') {
-    return hasShortCircuitLogical(node.callee) || node.arguments.some((argument) => hasShortCircuitLogical(argument))
+    return (
+      hasShortCircuitLogical(node.callee) ||
+      node.arguments.some((argument) => hasShortCircuitLogical(argument))
+    )
   }
 
   if (node.type === 'MemberExpression') {
@@ -46,7 +54,10 @@ function inspectJsxNode(node, report) {
   if (node.type === 'JSXExpressionContainer') {
     const expression = node.expression
 
-    if (expression?.type === 'LogicalExpression' && (expression.operator === '&&' || expression.operator === '||')) {
+    if (
+      expression?.type === 'LogicalExpression' &&
+      (expression.operator === '&&' || expression.operator === '||')
+    ) {
       if (isJsxLike(expression.left) || isJsxLike(expression.right)) {
         report(expression)
       }
@@ -70,7 +81,8 @@ export default {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Require explicit render branches instead of short-circuit condition chains in JSX rendering paths.',
+      description:
+        'Require explicit render branches instead of short-circuit condition chains in JSX rendering paths.',
     },
     schema: [],
     messages: {
@@ -95,14 +107,20 @@ export default {
         }
 
         if (argument.type === 'ConditionalExpression') {
-          if ((isJsxLike(argument.consequent) || isJsxLike(argument.alternate)) && hasShortCircuitLogical(argument.test)) {
+          if (
+            (isJsxLike(argument.consequent) || isJsxLike(argument.alternate)) &&
+            hasShortCircuitLogical(argument.test)
+          ) {
             report(argument.test)
           }
 
           return
         }
 
-        if (argument.type === 'LogicalExpression' && (argument.operator === '&&' || argument.operator === '||')) {
+        if (
+          argument.type === 'LogicalExpression' &&
+          (argument.operator === '&&' || argument.operator === '||')
+        ) {
           if (isJsxLike(argument.left) || isJsxLike(argument.right)) {
             report(argument)
           }

@@ -4,6 +4,7 @@ export type PracticeCategory =
   | 'Eliminating Waterfalls'
   | 'Bundle Size Optimization'
   | 'Client-Side Data Fetching'
+  | 'React Hooks'
   | 'Re-render Optimization'
   | 'Rendering Performance'
   | 'JavaScript Performance'

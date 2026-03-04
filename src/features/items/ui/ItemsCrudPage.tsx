@@ -20,26 +20,43 @@ export function ItemsCrudPage() {
     setSearchValue,
   } = useItemsCrud()
 
-  const handleCreate = useCallback(async (input: Parameters<typeof addItem>[0]) => {
-    // Best practice: keep callbacks stable when passing handlers to child components.
-    await addItem(input)
-  }, [addItem])
+  const handleCreate = useCallback(
+    async (input: Parameters<typeof addItem>[0]) => {
+      // Best practice: keep callbacks stable when passing handlers to child components.
+      await addItem(input)
+    },
+    [addItem],
+  )
 
-  const handleEdit = useCallback(async (id: string, input: Parameters<typeof editItem>[1]) => {
-    await editItem(id, input)
-  }, [editItem])
+  const handleEdit = useCallback(
+    async (id: string, input: Parameters<typeof editItem>[1]) => {
+      await editItem(id, input)
+    },
+    [editItem],
+  )
 
-  const handleDelete = useCallback(async (id: string) => {
-    await removeItem(id)
-  }, [removeItem])
+  const handleDelete = useCallback(
+    async (id: string) => {
+      await removeItem(id)
+    },
+    [removeItem],
+  )
 
   return (
     // Best practice: use semantic landmarks and headings for accessibility.
     <section aria-labelledby="items-crud-heading" className="items-crud">
       <Card className="items-crud-card">
         <CardHeader
-          header={<Text as="h2" id="items-crud-heading" size={600} weight="semibold">Work Items CRUD</Text>}
-          description={<Text>Feature-first React CRUD scaffold with accessibility and performance patterns.</Text>}
+          header={
+            <Text as="h2" id="items-crud-heading" size={600} weight="semibold">
+              Work Items CRUD
+            </Text>
+          }
+          description={
+            <Text>
+              Feature-first React CRUD scaffold with accessibility and performance patterns.
+            </Text>
+          }
         />
 
         <div className="items-crud-header-meta" aria-label="List metrics">
@@ -63,11 +80,7 @@ export function ItemsCrudPage() {
             placeholder="Search by title, owner, priority, or status"
             aria-label="Search work items"
           />
-          <ItemFormDialog
-            isSaving={isSaving}
-            onSubmit={handleCreate}
-            triggerLabel="Create item"
-          />
+          <ItemFormDialog isSaving={isSaving} onSubmit={handleCreate} triggerLabel="Create item" />
           <span className="items-crud-icon-helper" aria-hidden="true">
             <Add24Regular />
           </span>
@@ -85,7 +98,12 @@ export function ItemsCrudPage() {
             <Spinner label="Loading items" />
           </div>
         ) : (
-          <ItemsTable isSaving={isSaving} items={filteredItems} onDelete={handleDelete} onEdit={handleEdit} />
+          <ItemsTable
+            isSaving={isSaving}
+            items={filteredItems}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+          />
         )}
 
         {isFiltering ? <Text size={200}>Updating search results…</Text> : null}

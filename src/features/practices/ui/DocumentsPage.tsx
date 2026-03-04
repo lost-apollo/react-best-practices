@@ -33,6 +33,12 @@ const categoryMetaList: CategoryMeta[] = [
     summary: 'Model request states explicitly and guard against stale response races.',
   },
   {
+    category: 'React Hooks',
+    priority: 'High',
+    summary:
+      'Keep hooks deterministic by using complete dependencies and moving event logic out of effects.',
+  },
+  {
     category: 'Re-render Optimization',
     priority: 'Medium',
     summary: 'Stabilize props and avoid redundant state synchronization work.',
@@ -65,12 +71,14 @@ const categoryMetaList: CategoryMeta[] = [
   {
     category: 'Forms & Validation',
     priority: 'High',
-    summary: 'Build accessible forms with clear required states and reliable submit-time normalization.',
+    summary:
+      'Build accessible forms with clear required states and reliable submit-time normalization.',
   },
   {
     category: 'Code Review Guardrails',
     priority: 'High',
-    summary: 'Use review checklists to catch waterfalls, a11y regressions, and ownership leaks early.',
+    summary:
+      'Use review checklists to catch waterfalls, a11y regressions, and ownership leaks early.',
   },
   {
     category: 'Structure & Ownership',
@@ -121,8 +129,8 @@ export function DocumentsPage() {
       <header className="documents-page-header">
         <h2 id="documents-title">Best Practices Documents</h2>
         <p>
-          Wiki-style guidance for this Vite SPA: accessibility-first, predictable performance,
-          and clear feature ownership.
+          Wiki-style guidance for this Vite SPA: accessibility-first, predictable performance, and
+          clear feature ownership.
         </p>
 
         <ul className="documents-page-priority-model" aria-label="Priority model">
@@ -153,11 +161,17 @@ export function DocumentsPage() {
 
         <div className="documents-page-content" aria-label="Best practices content">
           {categorySections.map((section) => (
-            <section key={section.sectionId} id={section.sectionId} aria-labelledby={`${section.sectionId}-title`}>
+            <section
+              key={section.sectionId}
+              id={section.sectionId}
+              aria-labelledby={`${section.sectionId}-title`}
+            >
               <header className="documents-page-section-header">
                 <h3 id={`${section.sectionId}-title`}>{section.category}</h3>
                 <p>{section.summary}</p>
-                <span className="documents-page-section-priority">{section.categoryPriority} priority</span>
+                <span className="documents-page-section-priority">
+                  {section.categoryPriority} priority
+                </span>
               </header>
 
               <div className="documents-page-cards">

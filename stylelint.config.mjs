@@ -11,8 +11,7 @@ export default {
     },
   ],
   rules: {
-    'selector-class-pattern':
-      '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
+    'selector-class-pattern': '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
     'color-function-notation': 'modern',
     'alpha-value-notation': 'number',
     'comment-empty-line-before': null,

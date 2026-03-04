@@ -1,4 +1,12 @@
-import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, useTransition } from 'react'
+import {
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from 'react'
 import { createItem, deleteItem, listItems, updateItem } from '../api/itemsApi'
 import type { WorkItem, WorkItemInput } from '../model/item'
 
@@ -62,7 +70,8 @@ export function useItemsCrud() {
     const normalizedQuery = deferredSearchQuery.trim().toLowerCase()
 
     return items.filter((item) => {
-      const searchableText = `${item.title} ${item.owner} ${item.priority} ${item.status}`.toLowerCase()
+      const searchableText =
+        `${item.title} ${item.owner} ${item.priority} ${item.status}`.toLowerCase()
       return searchableText.includes(normalizedQuery)
     })
   }, [deferredSearchQuery, items])
@@ -91,30 +100,41 @@ export function useItemsCrud() {
     [],
   )
 
-  const addItem = useCallback(async (input: WorkItemInput) => {
-    await executeMutation(async () => {
-      const createdItem = await createItem(input)
-      // Best practice: functional state updates avoid stale closures during async writes.
-      setItems((currentItems) => [createdItem, ...currentItems])
-    }, 'Unable to create item. Please try again.')
-  }, [executeMutation])
+  const addItem = useCallback(
+    async (input: WorkItemInput) => {
+      await executeMutation(async () => {
+        const createdItem = await createItem(input)
+        // Best practice: functional state updates avoid stale closures during async writes.
+        setItems((currentItems) => [createdItem, ...currentItems])
+      }, 'Unable to create item. Please try again.')
+    },
+    [executeMutation],
+  )
 
-  const editItem = useCallback(async (id: string, input: WorkItemInput) => {
-    await executeMutation(async () => {
-      const updatedItem = await updateItem(id, input)
+  const editItem = useCallback(
+    async (id: string, input: WorkItemInput) => {
+      await executeMutation(async () => {
+        const updatedItem = await updateItem(id, input)
 
-      if (updatedItem) {
-        setItems((currentItems) => currentItems.map((item) => (item.id === id ? updatedItem : item)))
-      }
-    }, 'Unable to update item. Please try again.')
-  }, [executeMutation])
+        if (updatedItem) {
+          setItems((currentItems) =>
+            currentItems.map((item) => (item.id === id ? updatedItem : item)),
+          )
+        }
+      }, 'Unable to update item. Please try again.')
+    },
+    [executeMutation],
+  )
 
-  const removeItem = useCallback(async (id: string) => {
-    await executeMutation(async () => {
-      await deleteItem(id)
-      setItems((currentItems) => currentItems.filter((item) => item.id !== id))
-    }, 'Unable to delete item. Please try again.')
-  }, [executeMutation])
+  const removeItem = useCallback(
+    async (id: string) => {
+      await executeMutation(async () => {
+        await deleteItem(id)
+        setItems((currentItems) => currentItems.filter((item) => item.id !== id))
+      }, 'Unable to delete item. Please try again.')
+    },
+    [executeMutation],
+  )
 
   return {
     allItemsCount: items.length,

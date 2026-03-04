@@ -50,6 +50,21 @@ getItems(query).then(setItems)
 
 // Error and stale state handling are missing`,
   },
+  'React Hooks': {
+    language: 'tsx',
+    doCode: `const loadItems = useCallback(async () => {
+  const response = await searchItems(query)
+  setItems(response)
+}, [query])
+
+useEffect(() => {
+  void loadItems()
+}, [loadItems])`,
+    dontCode: `useEffect(() => {
+  void searchItems(query).then(setItems)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [])`,
+  },
   'Re-render Optimization': {
     language: 'tsx',
     doCode: `const columns = useMemo(() => buildColumns(locale), [locale])

@@ -55,13 +55,22 @@ function ItemsTableComponent({ isSaving, items, onDelete, onEdit }: ItemsTablePr
             <TableCell>
               <Badge
                 appearance="tint"
-                color={item.priority === 'High' ? 'danger' : item.priority === 'Medium' ? 'warning' : 'informative'}
+                color={
+                  item.priority === 'High'
+                    ? 'danger'
+                    : item.priority === 'Medium'
+                      ? 'warning'
+                      : 'informative'
+                }
               >
                 {item.priority}
               </Badge>
             </TableCell>
             <TableCell>
-              <Badge appearance="outline" color={item.status === 'Done' ? 'success' : 'informative'}>
+              <Badge
+                appearance="outline"
+                color={item.status === 'Done' ? 'success' : 'informative'}
+              >
                 {item.status}
               </Badge>
             </TableCell>

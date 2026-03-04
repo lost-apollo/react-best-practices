@@ -7,8 +7,8 @@ export function PracticesShowcase() {
       <header className="practices-showcase__header">
         <h2 id="practices-heading">Do / Don&apos;t Best Practices</h2>
         <p>
-          Focus areas for modern React teams: accessibility-first UI, predictable performance,
-          and sustainable project structure.
+          Focus areas for modern React teams: accessibility-first UI, predictable performance, and
+          sustainable project structure.
         </p>
       </header>
 
