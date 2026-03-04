@@ -1,19 +1,25 @@
-# React Best Practices Demo (2026)
+# React Best Practices Demo App (2026)
 
-Vite + React + TypeScript demo for engineering teams to showcase **Do / Don't** examples with a strong focus on:
+Vite + React + TypeScript + Fluent UI demo scaffold for teams to explore modern **Do / Don't** practices in a real working app.
 
-- Accessibility
-- Performance
-- Folder structure conventions
-- AI-assisted coding guardrails via Copilot instructions
+## What this demo includes
 
-## Stack
+- Home route (`/`): full client-side Work Items CRUD flow.
+- Documents route (`/documents`): wiki-style best-practices library with topic navigation, priorities, and rule-by-rule code examples.
+- Feature-first architecture (`app`, `features`, `shared`) with explicit ownership boundaries.
+- Accessibility-first UI patterns using Fluent UI React components.
+- Custom lint guardrails demonstrating how teams can enforce architecture and rendering standards.
+
+## Tech stack
 
 - React 19
 - Vite 7
 - TypeScript 5
-- ESLint 9 (type-aware, accessibility-focused)
+- Fluent UI React (`@fluentui/react-components`, `@fluentui/react-icons`)
+- React Router (`react-router-dom`)
+- ESLint 9 + custom local rules
 - Stylelint + SCSS
+- Prettier
 
 ## Scripts
 
@@ -29,47 +35,68 @@ Vite + React + TypeScript demo for engineering teams to showcase **Do / Don't** 
 - `npm run check` — typecheck + eslint
 - `npm run check:all` — typecheck + eslint + stylelint
 
-## Folder structure
+## Custom ESLint rule demo
+
+This repo includes a local custom rule:
+
+- `react-best-practices/no-short-circuit-render-conditions`
+
+Rule source:
+
+- `eslint-rules/no-short-circuit-render-conditions.js`
+
+Intentional violation example for demos:
+
+- `src/features/custom-lint-example/RenderBranchRuleViolationDemo.tsx`
+
+To demo the rule in action, run:
+
+```bash
+npm run lint
+```
+
+## Project structure
 
 ```text
 src/
   app/
     App.tsx
     styles.scss
+    theme.scss
   features/
+    custom-lint-example/
+      RenderBranchRuleViolationDemo.tsx
+    items/
+      api/
+      hooks/
+      model/
+      styles/
+      ui/
     practices/
       model/
-        practice-examples.ts
+      styles/
       ui/
-        PracticeCard.tsx
-        PracticesShowcase.tsx
   shared/
     types/
-      practice-example.ts
 ```
 
-## Team conventions showcased
+## Best-practice areas covered
 
-### Do
+- Eliminating waterfalls
+- Bundle size optimization
+- Client-side data fetching
+- Re-render optimization
+- Rendering performance
+- JavaScript performance
+- Advanced patterns
+- Accessibility (expanded, multi-rule)
+- Fluent UI patterns
+- Forms & validation
+- Code review guardrails
+- Structure & ownership
+- Style & linting
 
-- Use semantic HTML (`main`, `section`, `header`, `button`)
-- Keep feature code together by domain
-- Keep data models typed and explicit
-- Use linting to enforce accessibility and performance habits
+## Guidance files
 
-### Don't
-
-- Hide interactions in non-semantic elements
-- Use flat, mixed folders with no ownership boundaries
-- Pass unstable inline objects/functions deeply without need
-- Leave accessibility checks for late QA
-
-## Copilot guidance
-
-Repository-specific AI guidance lives in [.github/copilot-instructions.md](.github/copilot-instructions.md).
-
-This keeps generated code aligned with:
-
-- Accessibility-first decisions
-- Performance-safe React patterns
-- Team folder conventions
+- AI/project guidance: `.github/copilot-instructions.md`
+- Local skill guidance: `.github/skills/react-best-practices/SKILL.md`
