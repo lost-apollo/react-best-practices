@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.5;
+  color: var(--theme-text-primary);
+  background-color: var(--theme-bg-base);
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--theme-bg-base);
+  background-image:
+    var(--theme-gradient-backdrop),
+    url('/background-orbit.svg');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+.app-shell {
+  max-width: 75rem;
+  padding: 2.8rem 1.25rem 3.2rem;
+  margin: 0 auto;
+}
+
+.app-shell-hero {
+  position: relative;
+  display: grid;
+  gap: 0.65rem;
+  padding: 1.6rem;
+  margin-bottom: 1.9rem;
+  overflow: hidden;
+  background-image: var(--theme-gradient-hero);
+  border: 1px solid var(--theme-glass-hero-border);
+  border-radius: 1.1rem;
+  box-shadow: var(--theme-shadow-strong);
+  isolation: isolate;
+  backdrop-filter: blur(4px);
+}
+
+.app-shell-hero::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 0.28rem;
+  content: '';
+  background-image: var(--theme-accent-bar);
+}
+
+.app-shell-hero::after {
+  position: absolute;
+  top: -4.2rem;
+  right: -3.2rem;
+  width: 13rem;
+  height: 13rem;
+  pointer-events: none;
+  content: '';
+  background: radial-gradient(circle, rgb(0 183 195 / 0.28), rgb(0 183 195 / 0));
+}
+
+.app-shell-kicker {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.24rem 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--theme-brand-strong);
+  background-color: rgb(79 107 237 / 0.16);
+  border-radius: 999px;
+}
+
+.app-shell-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.8vw + 1rem, 2.65rem);
+  line-height: 1.2;
+  color: #123158;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.app-shell-subtitle {
+  max-width: 64ch;
+  margin: 0;
+  font-size: 1.03rem;
+  color: var(--theme-text-secondary);
+}
+
+.app-shell-nav {
+  display: inline-flex;
+  gap: 0.5rem;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+  background-image: var(--theme-gradient-toolbar);
+  border: 1px solid rgb(79 107 237 / 0.32);
+  border-radius: 0.8rem;
+}
+
+.app-shell-nav-link {
+  display: inline-flex;
+  padding: 0.45rem 0.8rem;
+  font-weight: 600;
+  color: var(--theme-brand-strong);
+  text-decoration: none;
+  border-radius: 0.55rem;
+  transition: background-color 160ms ease;
+}
+
+.app-shell-nav-link:hover {
+  background-color: rgb(79 107 237 / 0.14);
+}
+
+.app-shell-nav-link:focus-visible {
+  outline: 2px solid var(--theme-brand-primary);
+  outline-offset: 2px;
+}
+
+.app-shell-nav-link-active {
+  color: #fff;
+  background-color: var(--theme-brand-primary);
+}
+
+@media (width <= 45rem) {
+  .app-shell {
+    padding: 1.2rem;
+  }
+
+  .app-shell-hero {
+    padding: 1.1rem;
+  }
+}

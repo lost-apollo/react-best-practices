@@ -1,0 +1,231 @@
+.documents-page {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.documents-page-header {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+  background-image: var(--theme-gradient-card);
+  border: 1px solid var(--theme-glass-card-border);
+  border-radius: 0.9rem;
+  box-shadow: var(--theme-shadow-soft);
+}
+
+.documents-page-header h2 {
+  margin: 0;
+  color: #123158;
+}
+
+.documents-page-header p {
+  margin: 0;
+  color: var(--theme-text-secondary);
+}
+
+.documents-page-priority-model {
+  display: grid;
+  gap: 0.25rem;
+  padding-left: 1.2rem;
+  margin: 0;
+  color: var(--theme-text-primary);
+}
+
+.documents-page-layout {
+  display: grid;
+  grid-template-columns: minmax(11rem, 14rem) 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.documents-page-nav {
+  position: sticky;
+  top: 1rem;
+  padding: 0.95rem;
+  background-image: var(--theme-gradient-toolbar);
+  border: 1px solid rgb(79 107 237 / 0.35);
+  border-radius: 0.8rem;
+}
+
+.documents-page-nav h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.97rem;
+  color: var(--theme-text-primary);
+}
+
+.documents-page-nav ul {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.documents-page-nav a {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0.5rem;
+  color: var(--theme-brand-strong);
+  text-decoration: none;
+  border-radius: 0.45rem;
+}
+
+.documents-page-nav a span {
+  display: inline-flex;
+  min-width: 1.5rem;
+  padding: 0.06rem 0.35rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--theme-brand-strong);
+  background-color: rgb(79 107 237 / 0.12);
+  border-radius: 999px;
+}
+
+.documents-page-nav a:hover {
+  background-color: rgb(79 107 237 / 0.14);
+}
+
+.documents-page-nav a:focus-visible {
+  outline: 2px solid var(--theme-brand-primary);
+  outline-offset: 2px;
+}
+
+.documents-page-content {
+  display: grid;
+  gap: 1rem;
+}
+
+.documents-page-content section {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+  scroll-margin-top: 1rem;
+  background-image: var(--theme-gradient-card);
+  border: 1px solid var(--theme-glass-card-border);
+  border-radius: 0.9rem;
+  box-shadow: var(--theme-shadow-soft);
+}
+
+.documents-page-content h3 {
+  margin: 0;
+  color: #1d4067;
+}
+
+.documents-page-section-header {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.documents-page-section-header p {
+  margin: 0;
+  color: var(--theme-text-secondary);
+}
+
+.documents-page-section-priority {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--theme-brand-strong);
+  background-color: rgb(79 107 237 / 0.14);
+  border-radius: 999px;
+}
+
+.documents-page-cards {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.practice-card {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.95rem;
+  background-color: rgb(234 244 255 / 0.42);
+  border: 1px solid rgb(79 107 237 / 0.28);
+  border-radius: 0.8rem;
+}
+
+.practice-card-header {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.practice-card-category {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--theme-accent-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.practice-card-priority {
+  width: fit-content;
+  padding: 0.05rem 0.45rem;
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--theme-brand-strong);
+  background-color: rgb(79 107 237 / 0.14);
+  border-radius: 999px;
+}
+
+.practice-card-title {
+  margin: 0;
+  color: var(--theme-text-primary);
+}
+
+.practice-card-examples {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.practice-card-example {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.7rem;
+  border-radius: 0.65rem;
+}
+
+.practice-card-example h4,
+.practice-card-example p,
+.practice-card-rationale {
+  margin: 0;
+}
+
+.practice-card-example-do {
+  background-color: rgb(0 183 195 / 0.12);
+  border: 1px solid rgb(15 143 155 / 0.26);
+}
+
+.practice-card-example-dont {
+  background-color: rgb(232 90 173 / 0.12);
+  border: 1px solid rgb(232 90 173 / 0.24);
+}
+
+.practice-card-checklist {
+  display: grid;
+  gap: 0.3rem;
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.practice-card-code {
+  overflow-x: auto;
+  font-size: 0.82rem;
+  border: 1px solid rgb(79 107 237 / 0.2);
+  border-radius: 0.55rem;
+}
+
+@media (width <= 54rem) {
+  .documents-page-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .documents-page-nav {
+    position: static;
+  }
+}

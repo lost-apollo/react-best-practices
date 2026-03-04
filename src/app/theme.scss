@@ -1,0 +1,44 @@
+$theme-brand-500: #4f6bed;
+$theme-brand-600: #3552d6;
+$theme-accent-500: #00b7c3;
+$theme-accent-600: #0f8f9b;
+$theme-rose-500: #e85aad;
+$theme-bg-100: #eaf2ff;
+$theme-bg-200: #dfeaff;
+$theme-surface-100: #f3f8ff;
+$theme-surface-200: #eaf3ff;
+$theme-text-900: #0f2741;
+$theme-text-700: #224668;
+$theme-stroke-300: #bad1ef;
+
+:root {
+  --theme-bg-base: #{$theme-bg-100};
+  --theme-text-primary: #{$theme-text-900};
+  --theme-text-secondary: #{$theme-text-700};
+  --theme-stroke-soft: #{$theme-stroke-300};
+  --theme-brand-primary: #{$theme-brand-500};
+  --theme-brand-strong: #{$theme-brand-600};
+  --theme-accent-primary: #{$theme-accent-500};
+  --theme-accent-strong: #{$theme-accent-600};
+  --theme-highlight: #{$theme-rose-500};
+  --theme-surface-primary: #{$theme-surface-100};
+  --theme-surface-secondary: #{$theme-surface-200};
+  --theme-shadow-soft: 0 8px 20px rgb(23 55 112 / 0.12);
+  --theme-shadow-strong: 0 18px 40px rgb(23 55 112 / 0.16);
+  --theme-shadow-glow: 0 18px 42px rgb(79 107 237 / 0.2);
+  --theme-glass-hero-border: rgb(79 107 237 / 0.48);
+  --theme-glass-card-border: rgb(0 183 195 / 0.28);
+  --theme-accent-bar:
+    linear-gradient(90deg, rgb(79 107 237 / 0.95), rgb(0 183 195 / 0.92), rgb(232 90 173 / 0.9));
+  --theme-gradient-backdrop:
+    radial-gradient(circle at 12% 18%, rgb(79 107 237 / 0.38), rgb(79 107 237 / 0) 46%),
+    radial-gradient(circle at 88% 14%, rgb(0 183 195 / 0.3), rgb(0 183 195 / 0) 40%),
+    radial-gradient(circle at 54% 92%, rgb(232 90 173 / 0.24), rgb(232 90 173 / 0) 42%),
+    linear-gradient(155deg, rgb(234 242 255 / 0.84), rgb(223 234 255 / 0.8));
+  --theme-gradient-hero:
+    linear-gradient(138deg, rgb(243 248 255 / 0.62), rgb(228 240 255 / 0.48));
+  --theme-gradient-card:
+    linear-gradient(165deg, rgb(243 248 255 / 0.58), rgb(228 240 255 / 0.46));
+  --theme-gradient-toolbar:
+    linear-gradient(180deg, rgb(243 248 255 / 0.54), rgb(234 244 255 / 0.42));
+}
