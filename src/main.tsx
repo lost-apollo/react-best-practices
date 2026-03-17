@@ -7,6 +7,7 @@ import './app/styles.scss'
 import './features/custom-lint-examples/styles/fluent-showcase.scss'
 import './features/home/styles/items.scss'
 import './features/documents/styles/practices.scss'
+import './features/survey/styles/survey.scss'
 import { App } from './app/App'
 
 const rootElement = document.getElementById('root')

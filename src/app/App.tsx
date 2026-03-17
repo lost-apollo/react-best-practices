@@ -3,6 +3,7 @@ import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
 import { ItemsCrudPage } from '../features/home/ui/ItemsCrudPage'
 import { DocumentsPage } from '../features/documents/ui/DocumentsPage'
 import { FluentComponentsShowcase } from '../features/custom-lint-examples/ui/FluentComponentsShowcase'
+import { SurveyPage } from '../features/survey/ui/SurveyPage'
 
 function getNavLinkClassName({ isActive }: NavLinkRenderProps) {
   return isActive ? 'app-shell-nav-link app-shell-nav-link-active' : 'app-shell-nav-link'
@@ -30,12 +31,16 @@ export function App() {
         <NavLink to="/fluent-examples" className={getNavLinkClassName}>
           Fluent Examples
         </NavLink>
+        <NavLink to="/survey" className={getNavLinkClassName}>
+          Survey
+        </NavLink>
       </nav>
 
       <Routes>
         <Route path="/" element={<ItemsCrudPage />} />
         <Route path="/documents" element={<DocumentsPage />} />
         <Route path="/fluent-examples" element={<FluentComponentsShowcase />} />
+        <Route path="/survey" element={<SurveyPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </main>

@@ -9,6 +9,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 import noShortCircuitRenderConditions from './eslint-rules/no-short-circuit-render-conditions.js'
 import preferFluentPrimitives from './eslint-rules/prefer-fluent-primitives.js'
 import progressbarRequiresAccessibleName from './eslint-rules/progressbar-requires-accessible-name.js'
+import noModelStateInUi from './eslint-rules/no-model-state-in-ui.js'
 
 export default defineConfig([
   globalIgnores(['dist', 'coverage']),
@@ -28,6 +29,7 @@ export default defineConfig([
           'no-short-circuit-render-conditions': noShortCircuitRenderConditions,
           'prefer-fluent-primitives': preferFluentPrimitives,
           'progressbar-requires-accessible-name': progressbarRequiresAccessibleName,
+          'no-model-state-in-ui': noModelStateInUi,
         },
       },
     },
@@ -47,6 +49,7 @@ export default defineConfig([
       'react-best-practices/no-short-circuit-render-conditions': 'error',
       'react-best-practices/prefer-fluent-primitives': 'error',
       'react-best-practices/progressbar-requires-accessible-name': 'error',
+      'react-best-practices/no-model-state-in-ui': 'error',
     },
   },
   eslintConfigPrettier,
