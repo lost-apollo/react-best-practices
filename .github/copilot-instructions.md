@@ -39,7 +39,6 @@ Prioritize decisions in this order:
 
 ## UI framework standard (Fluent UI React)
 
-- Treat `@fluentui/react-components` as the default UI system for controls, dialog, form, table, card, and layout primitives.
 - Do not introduce parallel UI component libraries (for example MUI, Chakra, Ant) unless explicitly requested.
 - Keep visual consistency by preferring Fluent props/slots/appearances before custom wrappers.
 - Use `FluentProvider` theme tokens and existing CSS variables; avoid hard-coded one-off colors unless already established in app theme.
@@ -48,9 +47,6 @@ Prioritize decisions in this order:
 ### Fluent UI implementation expectations
 
 - Prefer semantic structure around Fluent controls (`main`, `section`, `header`, `form`).
-- For forms: use `Field` + labeled controls, required indicators, and clear validation state text.
-- For dialogs: ensure title, descriptive content, focus behavior, keyboard escape/close behavior, and clear primary/secondary actions.
-- Keep appearance usage intentional (`primary`, `secondary`, `subtle`) and consistent across features.
 - Avoid heavy inline style objects in JSX; prefer SCSS classes and theme variables for maintainable styling.
 
 ## Folder conventions

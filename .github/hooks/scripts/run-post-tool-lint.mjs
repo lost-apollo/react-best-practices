@@ -138,7 +138,6 @@ function main() {
   const payload = parsePayload(readStdin())
 
   if (!payloadTouchesSrc(payload)) {
-    emitMessage('Quality check skipped: no code changes under src were detected.')
     return
   }
 
@@ -146,7 +145,6 @@ function main() {
   const packageJsonPath = resolve(root, 'package.json')
 
   if (!existsSync(packageJsonPath)) {
-    emitMessage('Quality check skipped: package.json was not found.')
     return
   }
 
@@ -162,7 +160,6 @@ function main() {
   const quickCheckStatus = runCommand('npm run check:all --silent')
 
   if (quickCheckStatus === 0) {
-    emitMessage('Quality check passed: npm run check:all')
     return
   }
 
