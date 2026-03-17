@@ -8,7 +8,6 @@
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b --pretty",
     "lint": "eslint . --max-warnings 0",
-    "check:quick": "npm run lint && npm run typecheck",
     "lint:fix": "eslint . --fix",
     "lint:styles": "stylelint \"src/**/*.{css,scss}\"",
     "lint:styles:fix": "stylelint \"src/**/*.{css,scss}\" --fix",
