@@ -136,13 +136,6 @@ function emitMessage(message) {
 
 function main() {
   const payload = parsePayload(readStdin())
-  const toolName = findToolName(payload)
-  const sourceToolName = toolName || 'unknown tool'
-
-  if (!shouldRunLint(toolName)) {
-    emitMessage(`Quality check skipped: ${sourceToolName} is read-only.`)
-    return
-  }
 
   if (!payloadTouchesSrc(payload)) {
     emitMessage('Quality check skipped: no code changes under src were detected.')
