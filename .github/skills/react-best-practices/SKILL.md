@@ -37,7 +37,6 @@ Use this skill when:
 
 ## UI System Constraint (Fluent UI React)
 
-- Default to `@fluentui/react-components` for core UI primitives.
 - Do not add another UI component library unless explicitly requested.
 - Prefer Fluent composition and props over custom component reinvention.
 - Use `@fluentui/react-icons` for iconography and keep interactive icons labeled.
@@ -56,10 +55,9 @@ Use this skill when:
 - Keep Fluent imports narrow (import only used controls/icons) for bundle discipline.
 
 ## Folder Conventions (Feature-First)
-
+aaaaaaa
 ### Design Rules
 
-- Organize by feature/domain first, not by file type.
 - Separate UI concerns from domain/model logic inside each feature.
 - Keep files single-purpose and split large components early.
 - Keep nesting shallow (target 3 levels, hard max 4).
@@ -92,8 +90,6 @@ Use this skill when:
 
 - Keep route-level pages in `src/app` composition and feature UI in `src/features/<name>/ui`.
 - Keep reusable non-domain UI primitives in `src/shared/ui`; do not move feature-specific controls there early.
-- For tables/forms/dialogs, prioritize accessible Fluent patterns before custom behavior.
-- Use Prettier + ESLint + Stylelint together; do not weaken one tool to satisfy another.
 
 ## References
 

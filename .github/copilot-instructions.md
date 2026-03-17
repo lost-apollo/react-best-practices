@@ -94,13 +94,11 @@ Prioritize decisions in this order:
 
 ## React coding expectations
 
-- Prefer semantic HTML over generic wrappers.
 - Keep components focused and single-purpose.
 - Use `type` imports where possible.
 - Avoid avoidable new object/array/function literals in JSX props for memoized children.
 - Keep side effects explicit and minimal.
 - Put interaction-triggered logic in event handlers, not effects, when possible.
-- Derive display state during render instead of storing redundant state.
 - Prefer functional state updates when next value depends on previous value.
 
 ## Accessibility checklist
@@ -117,16 +115,12 @@ Prioritize decisions in this order:
 - Avoid heavy work in render paths.
 - Keep props stable for memoized children.
 - Split by feature and lazily load when needed.
-- Keep bundle dependencies intentional.
 - Start independent async work in parallel; await as late as correctness allows.
 - Prefer explicit conditional rendering over fragile short-circuit patterns.
 - Use transitions for non-urgent updates when UI responsiveness matters.
-- Avoid layout thrashing; prefer CSS classes and batched DOM/style changes.
-- Import only Fluent components/icons actually used in the file to keep bundle impact intentional.
 
 ## Style and linting
 
 - Respect existing ESLint and Stylelint rules.
 - Prefer SCSS modules/partials for feature styling when complexity grows.
 - Do not bypass lint warnings without a clear, documented reason.
-- Use Prettier formatting as part of normal workflow (`format` / `format:check`).
