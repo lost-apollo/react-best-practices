@@ -157,6 +157,15 @@ function main() {
     return
   }
 
+  const formatStatus = runCommand('npm run format --silent')
+
+  if (formatStatus !== 0) {
+    emitMessage(
+      'Formatting found issues: npm run format. Continuing without blocking so they can be fixed next.',
+    )
+    return
+  }
+
   const quickCheckStatus = runCommand('npm run check:all --silent')
 
   if (quickCheckStatus === 0) {

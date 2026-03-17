@@ -34,7 +34,9 @@ export function FluentComponentsShowcase() {
   const [name, setName] = useState('')
   const [category, setCategory] = useState('Design')
   const [completion, setCompletion] = useState(40)
-  const [summary, setSummary] = useState('Proposed updates for dashboard navigation and onboarding docs.')
+  const [summary, setSummary] = useState(
+    'Proposed updates for dashboard navigation and onboarding docs.',
+  )
   const [publishTarget, setPublishTarget] = useState('team')
 
   return (
@@ -94,7 +96,6 @@ export function FluentComponentsShowcase() {
             />
           </Field>
 
-
           <div className="fluent-showcase-progress-row">
             <span id={progressLabelId} className="fluent-showcase-visually-hidden">
               Completion progress
@@ -127,9 +128,15 @@ export function FluentComponentsShowcase() {
               <p className="fluent-showcase-inline-subtitle">Product Design Lead</p>
             </div>
             <TagGroup aria-label="Document status tags">
-              <Tag appearance="filled" size="medium">Draft</Tag>
-              <Tag appearance="outline" size="medium">Review</Tag>
-              <Tag appearance="outline" size="medium">Client-facing</Tag>
+              <Tag appearance="filled" size="medium">
+                Draft
+              </Tag>
+              <Tag appearance="outline" size="medium">
+                Review
+              </Tag>
+              <Tag appearance="outline" size="medium">
+                Client-facing
+              </Tag>
             </TagGroup>
           </div>
 
