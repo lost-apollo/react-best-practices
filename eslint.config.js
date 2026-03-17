@@ -7,6 +7,8 @@ import eslintConfigPrettier from 'eslint-config-prettier'
 import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import noShortCircuitRenderConditions from './eslint-rules/no-short-circuit-render-conditions.js'
+import preferFluentPrimitives from './eslint-rules/prefer-fluent-primitives.js'
+import progressbarRequiresAccessibleName from './eslint-rules/progressbar-requires-accessible-name.js'
 
 export default defineConfig([
   globalIgnores(['dist', 'coverage']),
@@ -24,6 +26,8 @@ export default defineConfig([
       'react-best-practices': {
         rules: {
           'no-short-circuit-render-conditions': noShortCircuitRenderConditions,
+          'prefer-fluent-primitives': preferFluentPrimitives,
+          'progressbar-requires-accessible-name': progressbarRequiresAccessibleName,
         },
       },
     },
@@ -41,6 +45,8 @@ export default defineConfig([
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-misused-promises': 'error',
       'react-best-practices/no-short-circuit-render-conditions': 'error',
+      'react-best-practices/prefer-fluent-primitives': 'error',
+      'react-best-practices/progressbar-requires-accessible-name': 'error',
     },
   },
   eslintConfigPrettier,

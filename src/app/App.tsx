@@ -1,7 +1,7 @@
 import type { NavLinkRenderProps } from 'react-router-dom'
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
-import { ItemsCrudPage } from '../features/items/ui/ItemsCrudPage'
-import { DocumentsPage } from '../features/practices/ui/DocumentsPage'
+import { ItemsCrudPage } from '../features/home/ui/ItemsCrudPage'
+import { DocumentsPage } from '../features/documents/ui/DocumentsPage'
 import { FluentComponentsShowcase } from '../features/custom-lint-examples/ui/FluentComponentsShowcase'
 
 function getNavLinkClassName({ isActive }: NavLinkRenderProps) {

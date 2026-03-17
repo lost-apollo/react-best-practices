@@ -1,39 +1,49 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import {
   Accordion,
   AccordionHeader,
   AccordionItem,
   AccordionPanel,
+  Avatar,
   Badge,
   Button,
   Card,
   CardHeader,
-  Checkbox,
   Combobox,
+  Divider,
   Field,
   Input,
+  MessageBar,
+  MessageBarBody,
+  MessageBarTitle,
   Option,
   ProgressBar,
+  Radio,
+  RadioGroup,
   Slider,
-  Switch,
+  Tag,
+  TagGroup,
+  Textarea,
+  Tooltip,
 } from '@fluentui/react-components'
 
 const categoryOptions = ['Design', 'Engineering', 'Research', 'Operations']
 
 export function FluentComponentsShowcase() {
+  const progressLabelId = useId()
   const [name, setName] = useState('')
   const [category, setCategory] = useState('Design')
-  const [isEnabled, setIsEnabled] = useState(true)
-  const [isPinned, setIsPinned] = useState(false)
   const [completion, setCompletion] = useState(40)
+  const [summary, setSummary] = useState('Proposed updates for dashboard navigation and onboarding docs.')
+  const [publishTarget, setPublishTarget] = useState('team')
 
   return (
     <section className="fluent-showcase" aria-labelledby="fluent-showcase-title">
       <header className="fluent-showcase-header">
         <p className="fluent-showcase-kicker">Custom Lint Example</p>
-        <h2 id="fluent-showcase-title">Fluent UI 10-Component Showcase</h2>
+        <h2 id="fluent-showcase-title">Fluent UI Extended Component Showcase</h2>
         <p>
-          This example intentionally renders 10 distinct Fluent UI component categories in one
+          This example intentionally renders a larger set of Fluent UI component categories in one
           feature screen.
         </p>
       </header>
@@ -84,36 +94,86 @@ export function FluentComponentsShowcase() {
             />
           </Field>
 
-          <div className="fluent-showcase-inline-controls">
-            <Checkbox
-              checked={isPinned}
-              onChange={(_event, data) => {
-                setIsPinned(typeof data.checked === 'boolean' ? data.checked : false)
-              }}
-              label="Pin to dashboard"
-            />
-            <Switch
-              checked={isEnabled}
-              onChange={(_event, data) => {
-                setIsEnabled(typeof data.checked === 'boolean' ? data.checked : false)
-              }}
-              label="Enable notifications"
-            />
-          </div>
 
           <div className="fluent-showcase-progress-row">
-            <ProgressBar value={completion / 100} thickness="large" />
-            <Badge appearance="filled" color="informative" size="large">
+            <span id={progressLabelId} className="fluent-showcase-visually-hidden">
+              Completion progress
+            </span>
+            <span
+              className="fluent-showcase-visually-hidden"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              Completion target is now {String(completion)} percent complete.
+            </span>
+            <ProgressBar
+              value={completion / 100}
+              thickness="large"
+              aria-labelledby={progressLabelId}
+              aria-valuetext={`${String(completion)} percent complete`}
+            />
+            <Badge appearance="filled" color="informative" size="large" aria-hidden="true">
               {completion}%
             </Badge>
           </div>
 
+          <Divider>Additional Fluent Components</Divider>
+
+          <div className="fluent-showcase-identity-row">
+            <Avatar name="Jordan Reeves" color="colorful" size={36} />
+            <div>
+              <p className="fluent-showcase-inline-title">Jordan Reeves</p>
+              <p className="fluent-showcase-inline-subtitle">Product Design Lead</p>
+            </div>
+            <TagGroup aria-label="Document status tags">
+              <Tag appearance="filled" size="medium">Draft</Tag>
+              <Tag appearance="outline" size="medium">Review</Tag>
+              <Tag appearance="outline" size="medium">Client-facing</Tag>
+            </TagGroup>
+          </div>
+
+          <Field label="Summary notes">
+            <Textarea
+              resize="vertical"
+              value={summary}
+              onChange={(_event, data) => {
+                setSummary(data.value)
+              }}
+            />
+          </Field>
+
+          <Field label="Publish target">
+            <RadioGroup
+              value={publishTarget}
+              onChange={(_event, data) => {
+                setPublishTarget(data.value)
+              }}
+              layout="horizontal"
+            >
+              <Radio value="team" label="Team" />
+              <Radio value="organization" label="Organization" />
+              <Radio value="public" label="Public" />
+            </RadioGroup>
+          </Field>
+
+          <Tooltip content="This action publishes a read-only preview" relationship="label">
+            <Button appearance="subtle">Open Share Preview</Button>
+          </Tooltip>
+
+          <MessageBar intent="info" layout="multiline">
+            <MessageBarBody>
+              <MessageBarTitle>Accessibility reminder</MessageBarTitle>
+              Keep control labels descriptive, especially when you use icon-only actions.
+            </MessageBarBody>
+          </MessageBar>
+
           <Accordion collapsible>
             <AccordionItem value="components-list">
-              <AccordionHeader>10 Fluent component types included</AccordionHeader>
+              <AccordionHeader>17 Fluent component types included</AccordionHeader>
               <AccordionPanel>
-                Accordion, Badge, Button, Card, Checkbox, Combobox, Input, ProgressBar, Slider,
-                Switch
+                Accordion, Avatar, Badge, Button, Card, Checkbox, Combobox, Divider, Input,
+                MessageBar, ProgressBar, RadioGroup, Slider, Switch, TagGroup, Textarea, Tooltip
               </AccordionPanel>
             </AccordionItem>
           </Accordion>

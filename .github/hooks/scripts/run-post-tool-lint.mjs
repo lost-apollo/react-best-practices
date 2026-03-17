@@ -137,14 +137,15 @@ function emitMessage(message) {
 function main() {
   const payload = parsePayload(readStdin())
   const toolName = findToolName(payload)
+  const sourceToolName = toolName || 'unknown tool'
 
   if (!shouldRunLint(toolName)) {
-    emitMessage(`Skipped lint hooks after ${toolName}.`)
+    emitMessage(`Quality check skipped: ${sourceToolName} is read-only.`)
     return
   }
 
   if (!payloadTouchesSrc(payload)) {
-    emitMessage('Skipped lint hooks because no changes under src were detected.')
+    emitMessage('Quality check skipped: no code changes under src were detected.')
     return
   }
 
@@ -152,20 +153,19 @@ function main() {
   const packageJsonPath = resolve(root, 'package.json')
 
   if (!existsSync(packageJsonPath)) {
-    emitMessage('Skipped lint hooks because package.json was not found.')
+    emitMessage('Quality check skipped: package.json was not found.')
     return
   }
 
-  const lintStatus = runCommand('npm run lint --silent')
-  const stylelintStatus = runCommand('npm run lint:styles --silent')
+  const quickCheckStatus = runCommand('npm run check:quick --silent')
 
-  if (lintStatus === 0 && stylelintStatus === 0) {
-    emitMessage('Lint checks passed after tool execution.')
+  if (quickCheckStatus === 0) {
+    emitMessage('Quality check passed: npm run check:quick')
     return
   }
 
   emitMessage(
-    'Lint checks reported issues. Continuing without blocking so you can address them in the next step.',
+    'Quality check found issues: npm run check:quick. Continuing without blocking so they can be fixed next.',
   )
 }
 

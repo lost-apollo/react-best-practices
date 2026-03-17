@@ -82,12 +82,12 @@ export default {
     type: 'suggestion',
     docs: {
       description:
-        'Require explicit render branches instead of short-circuit condition chains in JSX rendering paths.',
+        'Require explicit render branches instead of short-circuit condition chains in JSX rendering paths. Use a ternary operator or split into multiple statements for clarity.',
     },
     schema: [],
     messages: {
       avoidShortCircuit:
-        'Use explicit render branches instead of short-circuit render condition chains.',
+        'Use explicit render branches instead of short-circuit render condition chains. Use a ternary operator or split into multiple statements for clarity.',
     },
   },
   create(context) {
