@@ -1,0 +1,64 @@
+.fluent-showcase {
+  display: grid;
+  gap: 1rem;
+}
+
+.fluent-showcase-header {
+  display: grid;
+  gap: 0.45rem;
+
+  h2 {
+    margin: 0;
+    font-size: clamp(1.4rem, 1.2vw + 1rem, 1.85rem);
+    color: var(--theme-text-primary);
+  }
+
+  p {
+    max-width: 68ch;
+    margin: 0;
+    color: var(--theme-text-secondary);
+  }
+}
+
+.fluent-showcase-kicker {
+  width: fit-content;
+  padding: 0.2rem 0.64rem;
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--theme-brand-strong);
+  text-transform: uppercase;
+  background: rgb(79 107 237 / 0.16);
+  border-radius: 999px;
+}
+
+.fluent-showcase-card {
+  padding: 1rem;
+  background: var(--theme-gradient-card);
+  border: 1px solid var(--theme-glass-card-border);
+}
+
+.fluent-showcase-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.fluent-showcase-inline-controls {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.fluent-showcase-progress-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.fluent-showcase-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}

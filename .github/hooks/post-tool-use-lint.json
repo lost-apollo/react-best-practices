@@ -1,0 +1,13 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "type": "command",
+        "windows": "node .github/hooks/scripts/run-post-tool-lint.mjs",
+        "linux": "node .github/hooks/scripts/run-post-tool-lint.mjs",
+        "osx": "node .github/hooks/scripts/run-post-tool-lint.mjs",
+        "timeout": 120
+      }
+    ]
+  }
+}

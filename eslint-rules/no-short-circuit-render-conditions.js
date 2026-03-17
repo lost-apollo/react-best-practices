@@ -87,7 +87,7 @@ export default {
     schema: [],
     messages: {
       avoidShortCircuit:
-        'Use explicit loading/error/empty/success render branches instead of short-circuit render condition chains.',
+        'Use explicit render branches instead of short-circuit render condition chains.',
     },
   },
   create(context) {
