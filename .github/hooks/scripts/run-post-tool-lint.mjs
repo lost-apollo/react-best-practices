@@ -157,15 +157,15 @@ function main() {
     return
   }
 
-  const quickCheckStatus = runCommand('npm run check:quick --silent')
+  const quickCheckStatus = runCommand('npm run check:all --silent')
 
   if (quickCheckStatus === 0) {
-    emitMessage('Quality check passed: npm run check:quick')
+    emitMessage('Quality check passed: npm run check:all')
     return
   }
 
   emitMessage(
-    'Quality check found issues: npm run check:quick. Continuing without blocking so they can be fixed next.',
+    'Quality check found issues: npm run check:all. Continuing without blocking so they can be fixed next.',
   )
 }
 
